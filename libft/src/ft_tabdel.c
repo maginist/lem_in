@@ -6,22 +6,22 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 15:24:17 by maginist          #+#    #+#             */
-/*   Updated: 2018/11/29 15:29:29 by maginist         ###   ########.fr       */
+/*   Updated: 2018/12/07 13:12:45 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_tabdel(void **tab)
+void	ft_tabdel(char **tab)
 {
 	int	i;
 
 	i = 0;
-	if (!(tab) || !(*tab))
+	if (!(tab))
 		return ;
 	while (tab[i])
 	{
-		ft_memdel(&(tab[i]));
+		ft_memdel((void*)&tab[i]);
 		i++;
 	}
 	free(tab);

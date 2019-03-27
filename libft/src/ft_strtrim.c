@@ -3,51 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 11:53:13 by maginist          #+#    #+#             */
-/*   Updated: 2018/11/14 15:22:55 by maginist         ###   ########.fr       */
+/*   Created: 2018/11/13 12:42:26 by floblanc          #+#    #+#             */
+/*   Updated: 2018/11/13 14:47:56 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_cpymin(char *str, char *p, int mi, int mx)
+char	*ft_strtrim(char const *s)
 {
-	int i;
+	unsigned int		i;
+	unsigned int		save;
 
+	if (!s)
+		return (0);
 	i = 0;
-	while (mi <= mx)
-	{
-		str[i] = p[mi];
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
 		i++;
-		mi++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-char		*ft_strtrim(char const *s)
-{
-	int		mx;
-	int		mi;
-	char	*str;
-	char	*p;
-
-	mi = 0;
-	if (s)
-	{
-		p = (char*)s;
-		mx = ft_strlen(p) - 1;
-		while (p[mx] == ' ' || p[mx] == ',' || p[mx] == '\n' || p[mx] == '\t')
-			mx--;
-		while (p[mi] == ' ' || p[mi] == ',' || p[mi] == '\n' || p[mi] == '\t')
-			mi++;
-		if (mi > mx + 1)
-			return (ft_strnew(0));
-		if (!(str = (char*)malloc(sizeof(char) * (mx - mi) + 2)))
-			return (NULL);
-		return (ft_cpymin(str, p, mi, mx));
-	}
-	return (NULL);
+	if (s[i] == '\0')
+		return (ft_strnew(i));
+	save = i;
+	i = ft_strlen(s) - 1;
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
+		i--;
+	return (ft_strsub(s, save, i - save + 1));
 }

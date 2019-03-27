@@ -6,19 +6,18 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 14:02:58 by maginist          #+#    #+#             */
-/*   Updated: 2019/01/31 13:10:28 by maginist         ###   ########.fr       */
+/*   Updated: 2018/12/17 11:58:22 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		base_isvalide(char *base, unsigned int size)
+int		base_isvalide(char *base, int size)
 {
-	unsigned int	i;
-	unsigned int	j;
+	int				i;
+	int				j;
 
 	i = 0;
-	j = 0;
 	if (size < 2)
 		return (0);
 	while (i < size)
@@ -41,15 +40,10 @@ void	ft_putnbr_base(int n, char *base)
 	unsigned int	nb;
 	unsigned int	base_size;
 
-	base_size = (int)ft_strlen(base);
+	base_size = (unsigned int)ft_strlen(base);
 	nb = n;
 	if (!(base_isvalide(base, base_size)))
 		return ;
-	if (n < 0)
-	{
-		ft_putchar('-');
-		nb = -n;
-	}
 	if (nb < base_size)
 		ft_putchar(base[nb]);
 	else

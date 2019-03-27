@@ -3,52 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 10:10:02 by maginist          #+#    #+#             */
-/*   Updated: 2018/11/14 15:17:18 by maginist         ###   ########.fr       */
+/*   Created: 2018/11/14 11:37:56 by floblanc          #+#    #+#             */
+/*   Updated: 2018/11/14 15:19:18 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_countnb(int n)
+static int	ft_size(int n)
 {
-	int j;
+	int		i;
 
-	j = 0;
-	if (n < 0 || n == 0)
-		j = 1;
+	i = 0;
+	if (n == 0 || n < 0)
+		i = 1;
 	while (n != 0)
 	{
-		n = n / 10;
-		j++;
+		n /= 10;
+		i++;
 	}
-	return (j);
+	return (i);
 }
 
 char		*ft_itoa(int n)
 {
-	int		j;
+	int		i;
 	int		neg;
 	char	*str;
 
-	neg = 1;
-	j = ft_countnb(n);
+	i = ft_size(n);
 	if (n < 0)
 		neg = -1;
-	if (!(str = (char*)malloc(sizeof(char) * (j + 1))))
-		return (NULL);
-	str[j] = '\0';
-	j--;
-	while (j > -1)
+	else
+		neg = 1;
+	if (!(str = (char*)malloc(sizeof(char) * (i + 1))))
+		return (0);
+	str[i] = '\0';
+	i--;
+	while (i >= 0)
 	{
-		if (j == 0 && neg == -1)
-			str[j] = '-';
+		if (i == 0 && neg == -1)
+			str[i] = '-';
 		else
-			str[j] = (n % 10) * neg + '0';
+			str[i] = ((n % 10) * neg) + '0';
 		n /= 10;
-		j--;
+		i--;
 	}
 	return (str);
 }

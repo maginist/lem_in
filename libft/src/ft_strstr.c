@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 10:19:42 by maginist          #+#    #+#             */
-/*   Updated: 2018/11/09 15:06:17 by maginist         ###   ########.fr       */
+/*   Created: 2018/11/12 17:25:00 by floblanc          #+#    #+#             */
+/*   Updated: 2018/11/12 17:52:15 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,25 @@
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {
-	int		i;
-	int		j;
-	char	*hay;
-	char	*nee;
+	unsigned int	checker;
+	unsigned int	runner;
 
-	i = 0;
-	j = 0;
-	hay = (char*)haystack;
-	nee = (char*)needle;
-	if (nee[0] == '\0')
-		return (hay);
-	while (hay[i])
+	runner = 0;
+	checker = 0;
+	if (needle[0] == '\0')
+		return ((char*)haystack);
+	while (haystack[runner])
 	{
-		if (hay[i] == nee[0])
-			while (nee[j] == hay[i + j])
-			{
-				if (nee[j + 1] == '\0')
-					return (&(hay[i]));
-				j++;
-			}
-		i++;
-		j = 0;
+		if (haystack[runner] == needle[checker])
+			checker++;
+		else
+		{
+			runner -= checker;
+			checker = 0;
+		}
+		runner++;
+		if (checker == ft_strlen(needle))
+			return ((char*)haystack + runner - checker);
 	}
 	return (0);
 }

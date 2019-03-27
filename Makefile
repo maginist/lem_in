@@ -6,28 +6,47 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/21 10:33:32 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/25 16:20:03 by maginist         ###   ########.fr        #
+#    Updated: 2019/03/27 14:26:44 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem_in
-SRC_NAME =
+
+SRC_NAME =	already_exist.c\
+		extract_room.c\
+		free_lst.c\
+		is_valid.c\
+		stock_data.c\
+		main.c\
+
 SRC_PATH = ./src
+
 OBJ_PATH = ./obj
-INC = -I./include
+
+INC = -I./includes
+
 LIB = libft/
+
 CC = gcc
+
 CFLAGS = -Wall -Werror -Wextra
 
 _UNDER=$'\x1b[4m$'
+
 _GREEN=$'\x1b[32m$'
+
 _YELLOW=$'\x1b[33m$'
+
 _RED=$'\x1b[31m$'
+
 _WHITE=$'\x1b[37m$'
+
 _END=$'\x1b[0m$'
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
+
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 all : lib $(NAME)
@@ -42,7 +61,7 @@ lib :
 	@cp libft/libft.a .
 	@echo "$(_RED)[ LIBFT DONE ] $(_END)"
 
-$(NAME) : lib $(INC) $(SRC) $(OBJ_PATH) $(OBJ)
+$(NAME) : lib $(SRC) $(OBJ_PATH) $(OBJ)
 	@echo "\n\n"
 	@echo "$(_GREEN)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
 	@echo "$(YELLOW)|    COMPILING LEM_IN    |$(_END)"
@@ -61,7 +80,7 @@ clean :
 	@make clean -C $(LIB)
 	@rm -rf $(OBJ_PATH)
 	@echo "$(_RED)======< CLEAN PROJECT & LIBFT DONE >======$(_END)"
-	@rm libft.a
+	@rm -f ./libft.a
 
 fclean : clean
 	@make fclean -C $(LIB)
@@ -70,4 +89,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY = clean all $(NAME) $(OBJ) fclean re lib
+.PHONY : clean all $(NAME) fclean re lib

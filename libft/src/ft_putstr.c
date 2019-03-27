@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 15:59:56 by maginist          #+#    #+#             */
-/*   Updated: 2018/11/14 10:42:57 by maginist         ###   ########.fr       */
+/*   Created: 2018/12/14 14:13:16 by maginist          #+#    #+#             */
+/*   Updated: 2019/01/15 15:00:13 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 
 void	ft_putstr(char const *s)
 {
-	int i;
-
-	i = 0;
-	if (s)
-	{
-		while (s[i])
-		{
-			ft_putchar(s[i]);
-			i++;
-		}
-	}
+	if (s != NULL)
+		write(1, s, ft_strlen(s));
 }

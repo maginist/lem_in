@@ -6,20 +6,19 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 13:21:30 by floblanc          #+#    #+#             */
-/*   Updated: 2019/01/31 16:24:58 by maginist         ###   ########.fr       */
+/*   Updated: 2019/03/26 13:47:22 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 20
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# define BUFF_SIZE 32
 
-void				sort_int_tab(int *tab, unsigned int size);
-long				ft_atol(const char *str);
-int					get_next_line_mod(const int fd, char **line);
+unsigned int		ft_abs(int nb);
+int					get_next_line(const int fd, char **line);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -29,6 +28,7 @@ void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s);
+char				*ft_strndup(const char *s, size_t n);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
 char				*ft_strcat(char *s1, const char	*s2);
@@ -42,6 +42,7 @@ char				*ft_strnstr(const char *haystack, const char *needle,
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
+long				ft_atol(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
@@ -85,8 +86,9 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-void				ft_tabdel(void **tab);
+void				ft_tabdel(char **tab);
 void				ft_puttab(char **tab);
 size_t				ft_tab3size(void ***tab);
+int					ft_strsearch(char *src, char c);
 
 #endif

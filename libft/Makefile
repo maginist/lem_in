@@ -6,12 +6,14 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/12 10:09:35 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/25 16:14:09 by maginist         ###   ########.fr        #
+#    Updated: 2019/03/27 12:10:09 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+
 OBJ_PATH = ./obj
+
 SRC_PATH = ./src
 
 SRC_NAME = ft_memset.c\
@@ -23,6 +25,7 @@ SRC_NAME = ft_memset.c\
 	   ft_memcmp.c\
 	   ft_strlen.c\
 	   ft_strdup.c\
+	   ft_strndup.c\
 	   ft_strcpy.c\
 	   ft_strncpy.c\
 	   ft_strcat.c\
@@ -35,6 +38,7 @@ SRC_NAME = ft_memset.c\
 	   ft_strcmp.c\
 	   ft_strncmp.c\
 	   ft_atoi.c\
+	   ft_atol.c\
 	   ft_isalpha.c\
 	   ft_isdigit.c\
 	   ft_isalnum.c\
@@ -74,19 +78,22 @@ SRC_NAME = ft_memset.c\
 	   ft_lstmap.c\
 	   ft_tabdel.c\
 	   ft_puttab.c\
+	   ft_strsearch.c\
 	   ft_tab3size.c\
-	   get_next_line_mod.c\
-	   ft_atol.c\
-	   ft_strrev.c\
-	   ft_putnbr_base.c\
-	   sort_int_tab.c
+	   ft_abs.c\
+	   get_next_line.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-	CFLAGS = -Wall -Werror -Wextra
-	CC = gcc
-	INC = libft.h
-	SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
-	OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+
+CFLAGS = -Wall -Werror -Wextra
+
+CC = gcc
+
+INC = libft.h
+
+SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+
+OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 all : $(NAME)
 
@@ -106,4 +113,5 @@ fclean : clean
 	@rm -f $(NAME)
 
 re : fclean all
-.PHONY = all $(NAME) clean fclean re
+
+.PHONY : all $(NAME) clean fclean re

@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmap.c                                        :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 11:32:22 by floblanc          #+#    #+#             */
-/*   Updated: 2018/11/14 13:26:43 by floblanc         ###   ########.fr       */
+/*   Created: 2018/11/12 11:43:52 by floblanc          #+#    #+#             */
+/*   Updated: 2019/03/27 10:10:16 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmap(char const *s, char (*f)(char))
+char	*ft_strndup(const char *s, size_t n)
 {
-	unsigned int	i;
-	char			*str;
+	size_t	i;
+	char	*dst;
 
 	i = 0;
-	if (s)
-	{
-		if (!(str = (char*)malloc(sizeof(char) * (ft_strlen(s) + 1))))
-			return (0);
-		while (s[i])
-		{
-			str[i] = f(s[i]);
-			i++;
-		}
-		str[i] = '\0';
-		return (str);
-	}
-	else
+	if (!(dst = (char*)malloc(sizeof(char) * (n + 1))))
 		return (0);
+	while (s[i] && i < n)
+	{
+		dst[i] = s[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

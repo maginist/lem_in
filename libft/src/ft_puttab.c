@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 13:36:48 by maginist          #+#    #+#             */
-/*   Updated: 2018/12/02 21:05:42 by floblanc         ###   ########.fr       */
+/*   Updated: 2018/12/07 10:26:04 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	ft_puttab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		ft_putstr(tab[i]);
-		ft_putchar('\n');
+		ft_putendl(tab[i]);
 		i++;
 	}
 }
