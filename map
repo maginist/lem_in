@@ -1,0 +1,11 @@
+4
+1 2 2
+##start
+start 4 0
+##end
+end 4 6
+4 0 4
+start-1
+end-4
+1-4
+end-1

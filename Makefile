@@ -6,7 +6,7 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/21 10:33:32 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/27 14:26:44 by maginist         ###   ########.fr        #
+#    Updated: 2019/03/29 13:59:13 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,9 @@ SRC_NAME =	already_exist.c\
 		is_valid.c\
 		stock_data.c\
 		main.c\
+		make_matrix.c\
+		write_data.c\
+		ft_lstlen.c
 
 SRC_PATH = ./src
 
@@ -31,17 +34,16 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-_UNDER=$'\x1b[4m$'
-
-_GREEN=$'\x1b[32m$'
-
-_YELLOW=$'\x1b[33m$'
-
-_RED=$'\x1b[31m$'
-
-_WHITE=$'\x1b[37m$'
-
-_END=$'\x1b[0m$'
+# Colors
+_BLACK = $'\033[30m$'
+_RED = $'\033[31m$'
+_GREEN = $'\033[32m$'
+_YELLOW = $'\033[33m$'
+_BLUE = $'\033[34m$'
+_PURPLE = $'\033[35m$'
+_CYAN = $'\033[36m$'
+_GREY = $'\033[37m$'
+_END=$'\033[0m$'
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -54,7 +56,7 @@ all : lib $(NAME)
 lib :
 	@echo "\n\n"
 	@echo "$(_GREEN)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
-	@echo "$(YELLOW)|     COMPILING LIBFT    |$(_END)"
+	@echo "$(_YELLOW)|     COMPILING LIBFT    |$(_END)"
 	@echo "$(_GREEN)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
 	@echo "\n\n"
 	@make -C $(LIB) -j
