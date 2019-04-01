@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/29 17:32:56 by maginist         ###   ########.fr       */
+/*   Updated: 2019/03/31 11:10:42 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	rooms_in_tab(t_room **tab, t_room **begin)
 	int		size;
 
 	size = ft_lstlen(begin);
-	if (!(*tab = (t_room*)malloc(sizeof(t_room) * size)))
+	if (!(*tab = (t_room*)malloc(sizeof(t_room) * (size))))
 		exit(0);
 	if (!(begin && *begin))
 		return ;
@@ -65,35 +65,41 @@ void	rooms_in_tab(t_room **tab, t_room **begin)
 	order_tabroom(tab);
 }
 
-void	assign_value(int **matrix, int i, int j)
+void	fill_matrix2(t_room *tab, t_link **c, int **matrix, int i)
 {
-	matrix[j][j] += 1;
-	matrix[j][i] = -1;
+	int		j;
+
+	j = 0;
+	while (j < i)
+	{
+		if (ft_strcmp(tab[j].name, (*c)->name1) == 0
+				|| ft_strcmp(tab[j].name, (*c)->name2) == 0)
+		{
+			matrix[i][i] = matrix[i][i] + 1;
+			matrix[j][j] = matrix[j][j] + 1;
+			matrix[j][i] = -1;
+			matrix[i][j] = -1;
+			return ;
+		}
+		j++;
+	}
 }
 
 void	fill_matrix(t_room *tab, t_link **begin, int **matrix, int size)
 {
 	int		i;
-	int		j;
 	t_link	*c;
 
-	i = 0;
+	i = 1;
 	while (i < size)
 	{
-		j = 0;
-		while (j < size)
+		c = *begin;
+		while (c)
 		{
-			c = *begin;
-			while (c)
-			{
-				if ((!(ft_strcmp(tab[i].name, c->name1))
-							&& !ft_strcmp(tab[j].name, c->name2))
-						|| (!(ft_strcmp(tab[i].name, c->name2))
-							&& !(ft_strcmp(tab[j].name, c->name1))))
-					assign_value(matrix, i, j);
-				c = c->next;
-			}
-			j++;
+			if (ft_strcmp(tab[i].name, c->name1) == 0
+					|| ft_strcmp(tab[i].name, c->name2) == 0)
+				fill_matrix2(tab, &c, matrix, i);
+			c = c->next;
 		}
 		i++;
 	}
@@ -108,7 +114,6 @@ int		**set_matrix(t_room *tab, t_link **begin, int size)
 	i = 0;
 	if (!(matrix = (int**)malloc(sizeof(int*) * size)))
 		exit(0);
-	matrix[size] = 0;
 	while (i < size)
 	{
 		if (!(matrix[i] = (int*)malloc(sizeof(int) * size)))

@@ -6,13 +6,13 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 16:50:34 by maginist          #+#    #+#             */
-/*   Updated: 2019/03/29 13:42:56 by maginist         ###   ########.fr       */
+/*   Updated: 2019/03/30 20:54:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	stock_to_right(char *line, t_write **begin)
+void	stock_to_write(char *line, t_write **begin)
 {
 	t_write	*new;
 	t_write	*current;
@@ -30,4 +30,19 @@ void	stock_to_right(char *line, t_write **begin)
 			current = current->next;
 		current->next = new;
 	}
+}
+
+void	write_data(t_write **begin)
+{
+	t_write	*current;
+
+	if (!(begin && *begin))
+		return ;
+	current = *begin;
+	while (current)
+	{
+		ft_putendl(current->str);
+		current = current->next;
+	}
+	free_lst_write(begin);
 }
