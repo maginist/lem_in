@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/01 17:10:54 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/03 17:09:44 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	order_tabroom(t_room **tab)
 	t_room	tmp;
 	int		i;
 
+	if (!(tab && *tab))
+		return ;
 	i = 0;
 	while ((*tab)[i].startend != 1)
 		i++;
@@ -55,6 +57,7 @@ void	rooms_in_tab(t_room **tab, t_room **begin)
 		(*tab)[i].x = current->x;
 		(*tab)[i].y = current->y;
 		(*tab)[i].startend = current->startend;
+		(*tab)[i].wth = 0;
 		(*tab)[i].taken = 0;
 		(*tab)[i].next = current->next;
 		current = current->next;

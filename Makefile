@@ -6,7 +6,7 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/21 10:33:32 by floblanc          #+#    #+#              #
-#    Updated: 2019/04/01 17:09:42 by floblanc         ###   ########.fr        #
+#    Updated: 2019/04/03 17:09:06 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC_NAME =	already_exist.c\
 		make_matrix.c\
 		write_data.c\
 		ft_lstlen.c\
+		bfs.c
 
 SRC_PATH = ./src
 

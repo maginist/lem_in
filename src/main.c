@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/01 16:43:39 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/03 16:22:34 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ int		main(void)
 	size = ft_lstlen(&roombeg);
 	rooms_in_tab(&tab, &roombeg);
 	matrix = set_matrix(tab, &linkbeg, size);
-/*	int		i = 0;
-	int		j;
+	bfs(matrix, 1, 0, tab);
+	int		i = 0;
+/*	int		j;
 	while (i < size)
 	{
 		j = 0;
@@ -45,13 +46,12 @@ int		main(void)
 		i++;
 		printf("\n");
 	}
-	i = 0;
-	while (i < size)
+	i = 0;*/
+	while (i < 2)
 	{
-		printf("name = %s, x = %d, y = %d, startend = %d, taken = %d, p= %p\n", tab[i].name, tab[i].x, tab[i].y, tab[i].startend, tab[i].taken, tab[i].next);
+		printf("name = %s, x = %d, y = %d, startend = %d, wth = %d, taken = %d, p= %p\n", tab[i].name, tab[i].x, tab[i].y, tab[i].startend, tab[i].wth, tab[i].taken, tab[i].next);
 		i++;
-	}*/
-//	put_weigth(tab, &str, matrix, size);
+	}
 	printf("size = %d\n",size);
 	return (0);
 }
