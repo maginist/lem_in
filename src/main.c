@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/03 18:17:28 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/04 14:02:43 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	main2(t_room *roombeg, t_link *linkbeg, int ant_n, t_write *str)
 	t_room	*tab;
 	int		size;
 
+	(void)ant_n;
 	tab = 0;
 	matrix = 0;
 	size = ft_lstlen(&roombeg);
@@ -30,7 +31,7 @@ void	main2(t_room *roombeg, t_link *linkbeg, int ant_n, t_write *str)
 	{
 		write_data(&str);
 		free_lst_write(&str);
-		algosamere(tab, matrix);
+	//	algosamere(tab, matrix);
 	}
 
 	free_room_tab(&tab, size);
