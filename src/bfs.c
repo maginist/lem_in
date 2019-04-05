@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 12:01:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/04 15:30:54 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/05 18:20:38 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,66 @@ void	bfs(int **matrix, int i, int j, t_room *tab)
 	bfs(matrix, j, 0, tab);
 }
 
-void	algosamere(t_room *tab, int **matrix)
+void	calc_step(t_path *struc, int ant_n, int path_n)
 {
-	t_path	*path;
+	int	i;
 
+	struc->path[0][struc->len[0]] = ant_n;
+	if (path_n == 1)
+	{
+		struc->step = struc->len[0] + struc->path[0][struc->len[0]] - 1;
+		return ;
+	}
+	i = 1;
+	while (i > 0)
+	{
+		i = 0;
+		while ((i < path_n - 1) && (struc->len[i] + struc->path[i][struc->len[i]] - 1 >= struc->len[i + 1] + struc->path[i + 1][struc->len[i + 1]]))
+			i++;
+		if (i > 0)
+		{
+			struc->path[0][struc->len[0]]--;
+			struc->path[i][struc->len[i]]++;
+		}
+	}
+	struc->step = struc->len[1] + struc->path[1][struc->len[1]] - 1;
 }
+
+/*int	main(int ac, char **av)
+{
+	int ant_n = atoi(av[1]);
+	t_path test;
+	int tablen[3]={5,10};
+	int	len0[15] = {1,2,3,4,5,0,0,0,0,0,0,0,0,0,0};
+	int	len1[15] = {1,2,3,4,5,6,7,8,9,10,0,0,0,0,0};
+	//int	len2[15] = {1,2,3,4,5,0,0,0,0,0,0,0,0,0,0};
+
+	if (ac == 2)
+	{
+		test.path = (int**)malloc(sizeof(int*) * 2);
+		test.path[0] = len0;
+		test.path[1] = len1;
+		//test.path[2] = len2;
+		test.len = tablen;
+		calc_step(&test, ant_n, 2);
+		printf("step : %d\nlen0 : %d\nlen1 : %d\n", test.step,len0[5],len1[10]);
+	}
+	return (0);
+}*/
+
+void	stock_path(t_room *tab, int **matrix, int size)
+{
+	t_path	**path;
+	t_path	*len;
+	int		i;
+	int		j;
+	int		k;
+
+	k = 0;
+	i = 0;
+}
+/*
+void	algo(t_room *tab, int **matrix)
+{
+	
+}*/

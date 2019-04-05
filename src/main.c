@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/04 14:02:43 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/05 17:46:18 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,28 @@ void	main2(t_room *roombeg, t_link *linkbeg, int ant_n, t_write *str)
 		write(2, "ERROR\n", 6);
 	else
 	{
+		int	i = 0;
+		int	j;
+		while (i < size)
+		{
+			j = 0;
+			while (j < size)
+			{
+				printf("%d\t", matrix[i][j]);
+				j++;
+			}
+			i++;
+			printf("\n");
+		}
+		i = 0;
+		while (i < size)
+		{
+			printf("name = %s, x = %d, y = %d, startend = %d, wth = %d,taken = %d, p= %p\n", tab[i].name, tab[i].x, tab[i].y, tab[i].startend, tab[i].wth, tab[i].taken, tab[i].next);
+			i++;
+		}
 		write_data(&str);
-		free_lst_write(&str);
-	//	algosamere(tab, matrix);
+		//free_lst_write(&str);
+		//	algosamere(tab, matrix);
 	}
 
 	free_room_tab(&tab, size);

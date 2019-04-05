@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/04 14:37:45 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/05 17:52:13 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef	struct		s_write
 typedef	struct		s_path
 {
 	int				**path;
-	int				len;
+	int				*len;
 	int				step;
 	struct s_path	*next;
 }					t_path;
