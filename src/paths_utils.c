@@ -6,16 +6,50 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 12:01:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/09 11:27:47 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/09 13:41:53 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-/*void	find_path(int **matrix, t_room *tab, int size, t_path *new)
+
+void	ant_walk(t_path *best, t_room *tab, int j)
 {
-	
-}*/
+	int i;
+
+	i = best->len[j] - 1;
+	while (i > 0)
+	{
+		tab[best->path[j][i]].taken = tab[best->path[j][i - 1]].taken;
+		i--;
+	}
+}
+void	use_path(t_path *best, t_room *tab, int path_n)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	j = 0;
+	while (tab[j].next)
+		tab[j++].taken = 0;
+	tab[j].taken = 0;
+	while (best->step-- > 0)
+	{
+		j = 0;
+		while (j < path_n)
+		{
+			ant_walk(best, tab, j);
+			if (best->path[best->len[j]] > 0)
+				tab[best->path[j][0]].taken = i++;
+			else
+				tab[best->path[j][0]].taken = 0;
+			best->path[best->len[j]]--;
+			write_path(best, tab, j, path_n);
+			j++;
+		}
+	}
+}
 
 void	stock_len(t_path *new, int path_n)
 {
