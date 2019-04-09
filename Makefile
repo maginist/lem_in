@@ -3,25 +3,28 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/03/21 10:33:32 by floblanc          #+#    #+#              #
-#    Updated: 2019/04/04 14:27:07 by maginist         ###   ########.fr        #
+#    Created: 2019/04/09 11:22:24 by maginist          #+#    #+#              #
+#    Updated: 2019/04/09 11:31:20 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem_in
 
-SRC_NAME =	already_exist.c\
-		extract_room.c\
-		free_lst.c\
-		is_valid.c\
-		stock_data.c\
-		main.c\
-		make_matrix.c\
-		write_data.c\
-		ft_lstlen.c\
-		bfs.c
+SRC_NAME =already_exist.c\
+		  extract_room.c\
+		  free_lst.c\
+		  is_valid.c\
+		  stock_data.c\
+		  main.c\
+		  make_matrix.c\
+		  write_data.c\
+		  ft_lstlen.c\
+		  paths_utils.c\
+		  free_lst2.c\
+		  put_wth.c\
+		  utils.c
 
 SRC_PATH = ./src
 
@@ -36,7 +39,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g3 #\\\\\\\\\\\\\\\\\\G3////////////////////////
 
 # Colors
-_BLACK = $'\033[30m$'
+CK = $'\033[30m$'
 _RED = $'\033[31m$'
 _GREEN = $'\033[32m$'
 _YELLOW = $'\033[33m$'
