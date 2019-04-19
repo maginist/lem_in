@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 14:05:54 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/19 17:07:36 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ int		fill_matrix(t_room *tab, int **matrix, char *str, int size)
 	i = 0;
 	while (str[i] && str[i] != '-')
 		i++;
+	str[i] = '\0';
 	run = 0;
-	while (run < size && ft_strncmp(tab[run].name, str, i) != 0)
+	while (run < size && ft_strcmp(tab[run].name, str) != 0)
 		run++;
 	if (run < size && fill_matrix2(tab, str + i + 1, matrix, run))
 		return (1);

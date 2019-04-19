@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/18 17:33:35 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/19 16:22:08 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,18 +110,6 @@ void	other_way(int **matrix, t_room *tab, t_path **new, int size)
 	}
 	if (find_path(matrix, tab, &another_new, size))
 		try_swap_t_path(&another_new, new, tab);
-	else
-	{
-		i = 0;
-		j = 0;
-		while (i < (*new)->path_n)
-		{
-			j = 0;
-			while ((*new)->path[i][j] != 1)
-				tab[(*new)->path[i][j++]].taken = i + 1;
-			i++;
-		}
-	}
 	free_paths(&another_new);// si on free dans le vide ca viens de la je pense
 	return ;
 }
