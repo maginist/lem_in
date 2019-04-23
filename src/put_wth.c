@@ -6,11 +6,21 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 17:07:36 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/19 17:16:53 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+int		onelink_startend(t_room *tab, t_path **best, int **matrix)
+{
+	if (matrix[0][1] == -1)
+	{
+		//on bloque les autres chemins puis boom tout dans le best;
+	}
+	else
+		return (0);
+}
 
 void	put_wth(int **matrix, int i, int j, t_room *tab)
 {
@@ -42,6 +52,7 @@ int		fill_matrix(t_room *tab, int **matrix, char *str, int size)
 	run = 0;
 	while (run < size && ft_strcmp(tab[run].name, str) != 0)
 		run++;
+	str[i] = '-';
 	if (run < size && fill_matrix2(tab, str + i + 1, matrix, run))
 		return (1);
 	return (0);
