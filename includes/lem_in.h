@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 12:16:30 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/25 15:09:30 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ typedef	struct		s_path
 	struct s_path	*next;
 }					t_path;
 
-int					room_already_exist(t_room **begin, t_room *new);
+int					room_already_exist(t_room **begin, t_room *new
+		, t_room **end);
 int					link_already_exist(t_link **begin, t_link *new);
 int					room_form_is_valid(char *str);
 int					link_form_is_valid(char *str);
@@ -61,7 +62,8 @@ int					check_startend(t_room **begin);
 int					link_is_valid(t_link *new, t_room **begin);
 int					command_is_valid(char *str);
 int					valid_digit(char *line);
-int					**set_matrix(t_room *tab, t_write **str, int size);
+void				set_matrix(t_room *tab, t_write **str, int size
+		, int ***matrix);
 char				*extract_room_name(char *str);
 int					extract_room_x(char *str, int *error);
 int					extract_room_y(char *str, int *error);
@@ -85,10 +87,11 @@ int					calc_size(t_room *tab);
 void				free_paths(t_path **begin);
 void				use_path(t_path *best, t_room *tab, int size);
 void				write_path(t_path *best, t_room *tab, int j, int ant_n);
-void				copy_best(t_path *best, t_path *new, int size);
+void				copy_best(t_path *best, t_path *new, int size, t_room *tab);
 int					enougth_room_for_more(t_path *best, t_room *tab);
-void				clean_some_taken(t_room *tab, int size);
+void				clean_some_taken(t_room *tab, int size, int symb);
 void				try_swap_t_path(t_path **another_new, t_path **new
 		, t_room *tab);
+void				onelink_startend(int ant_n);
 
 #endif

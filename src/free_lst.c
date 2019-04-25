@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 10:08:54 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 12:08:24 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/25 15:10:22 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,14 @@ void	free_paths(t_path **begin)
 	{
 		before = *begin;
 		j = 0;
-		while (j < i)
+		while (j <= i)
 			free((*begin)->path[j++]);
+		free((*begin)->path);
 		free((*begin)->len);
 		i++;
 		*begin = (*begin)->next;
 		free(before);
 		before = 0;
 	}
+//	free(*begin);
 }

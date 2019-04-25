@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 17:07:36 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/24 10:38:49 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ void	put_wth(int **matrix, int i, int j, t_room *tab)
 	put_wth(matrix, j, 0, tab);
 }
 
+void	onelink_startend(int ant_n)
+{
+	int i;
+
+	i = 1;
+	printf("\n");
+	while (i != ant_n)
+	{
+		printf("L%d-end ", i);
+		i++;
+	}
+	printf("L%d-end", i);
+}
+
 int		fill_matrix(t_room *tab, int **matrix, char *str, int size)
 {
 	int		i;
@@ -42,6 +56,7 @@ int		fill_matrix(t_room *tab, int **matrix, char *str, int size)
 	run = 0;
 	while (run < size && ft_strcmp(tab[run].name, str) != 0)
 		run++;
+	str[i] = '-';
 	if (run < size && fill_matrix2(tab, str + i + 1, matrix, run))
 		return (1);
 	return (0);
