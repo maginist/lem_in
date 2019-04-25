@@ -6,12 +6,17 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/04/24 15:26:15 by floblanc         ###   ########.fr       */
+=======
+/*   Updated: 2019/04/22 16:27:43 by floblanc         ###   ########.fr       */
+>>>>>>> ef60ff89d9f113862f402f12f3ad8a3e84df2cda
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
+<<<<<<< HEAD
 void	swap_path(t_path **new, int size, int i)
 {
 	int	tmp[size];
@@ -65,11 +70,33 @@ int		all_len_complete(t_path *new)
 
 int		analyse_block(t_room *tab, t_path *new, int *way, int pos)
 {
+=======
+int		all_len_complete(t_path *new)
+{
+	int	i;
+
+	i = 0;
+	while (i < new->path_n)
+	{
+		if (new->len[i] == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int		analyse_block(t_room *tab, t_path *new, int *way, int pos)
+{
+>>>>>>> ef60ff89d9f113862f402f12f3ad8a3e84df2cda
 	int	block;
 	int	i;
 
 	i = 0;
+<<<<<<< HEAD
 	//	printf(" %d\n",new->path[*way][pos]);
+=======
+//	printf(" %d\n",new->path[*way][pos]);
+>>>>>>> ef60ff89d9f113862f402f12f3ad8a3e84df2cda
 	new->path[*way][pos] *= -1;
 	block = tab[new->path[*way][pos]].taken - 1;
 	tab[new->path[*way][pos]].taken = *way + 1;
@@ -77,6 +104,7 @@ int		analyse_block(t_room *tab, t_path *new, int *way, int pos)
 		i++;
 	if (new->path[block][i] == -1)
 		new->path[block][i--] = 0;
+<<<<<<< HEAD
 	//	printf("new->path[%d][%d] = %d != new->path[%d][%d] = %d\n", block, i, new->path[block][i], *way, pos, new->path[*way][pos]);
 	while (new->path[block][i] != new->path[*way][pos])
 	{
@@ -90,6 +118,20 @@ int		analyse_block(t_room *tab, t_path *new, int *way, int pos)
 	new->path[block][i] = 0;
 	new->len[block] = 0;
 	*way = block - 1;
+=======
+//	printf("new->path[%d][%d] = %d != new->path[%d][%d] = %d\n", block, i, new->path[block][i], *way, pos, new->path[*way][pos]);
+	while (new->path[block][i] != new->path[*way][pos])
+	{
+	//	if (i >= 0)
+	//		printf("new->path[%d][%d] = %d != new->path[%d][%d] = %d\n", block, i, new->path[block][i], *way, pos, new->path[*way][pos]);
+		tab[new->path[block][i]].taken = 0;
+		new->path[block][i] = 0;
+		i--;
+	}
+		new->path[block][i] = 0;
+		new->len[block] = 0;
+		*way = block - 1;
+>>>>>>> ef60ff89d9f113862f402f12f3ad8a3e84df2cda
 	return (i - 1);
 }
 
@@ -119,6 +161,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 			if ((!(tab[i].taken) && (best == 0 || tab[i].wth < tab[best].wth)))
 				best = i;
 			else if (pos > 0 && tab[i].taken > 0 && (tab[i].taken >/*si on l'inverse on a d'autres chemins ca peut etre interessant de lancer les 2 et garder le meilleur*/ way + 1
+<<<<<<< HEAD
 						&& (best == 0 || tab[block].wth > tab[i].wth)))
 				block = i;
 		}
@@ -127,6 +170,16 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 		i++;
 	}
 	//	printf("best = %d %s.taken = %d pour le way %d\n", best, tab[best].name, tab[best].taken,  way);
+=======
+							&& (best == 0 || tab[block].wth > tab[i].wth)))
+				block = i;
+		}
+			if (best == 1)
+				break ;
+		i++;
+	}
+//	printf("best = %d %s.taken = %d pour le way %d\n", best, tab[best].name, tab[best].taken,  way);
+>>>>>>> ef60ff89d9f113862f402f12f3ad8a3e84df2cda
 	if (best != 0 && best != 1)
 		tab[best].taken = way + 1;
 	else if (!(best) && block > 0)
@@ -165,6 +218,9 @@ int		find_path(int **matrix, t_room *tab, t_path **new, int size)
 		}
 		j++;
 	}
+<<<<<<< HEAD
 	sort_paths(new, size);
+=======
+>>>>>>> ef60ff89d9f113862f402f12f3ad8a3e84df2cda
 	return (0);
 }
