@@ -6,11 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/04/25 15:09:30 by maginist         ###   ########.fr       */
-=======
-/*   Updated: 2019/04/20 10:16:07 by floblanc         ###   ########.fr       */
->>>>>>> ef60ff89d9f113862f402f12f3ad8a3e84df2cda
+/*   Updated: 2019/04/26 09:36:44 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +62,7 @@ int					check_startend(t_room **begin);
 int					link_is_valid(t_link *new, t_room **begin);
 int					command_is_valid(char *str);
 int					valid_digit(char *line);
-void				set_matrix(t_room *tab, t_write **str, int size
-		, int ***matrix);
+void				set_matrix(t_room *tab, t_write **str, int size, int ***matrix);
 char				*extract_room_name(char *str);
 int					extract_room_x(char *str, int *error);
 int					extract_room_y(char *str, int *error);

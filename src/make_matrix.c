@@ -6,11 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/04/24 11:47:37 by floblanc         ###   ########.fr       */
-=======
-/*   Updated: 2019/04/19 14:55:35 by floblanc         ###   ########.fr       */
->>>>>>> ef60ff89d9f113862f402f12f3ad8a3e84df2cda
+/*   Updated: 2019/04/26 09:37:54 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +132,7 @@ void	set_matrix(t_room *tab, t_write **str, int size, int ***matrix)
 	int		j;
 
 	i = 0;
-	if (!((*matrix) = (int**)malloc(sizeof(int*) * size)))
+	if (!(*matrix = (int**)malloc(sizeof(int*) * size)))
 		exit(0);
 	while (i < size)
 	{

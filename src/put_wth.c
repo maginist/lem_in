@@ -6,25 +6,11 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2019/04/24 10:38:49 by maginist         ###   ########.fr       */
-=======
-/*   Updated: 2019/04/19 17:16:53 by floblanc         ###   ########.fr       */
->>>>>>> ef60ff89d9f113862f402f12f3ad8a3e84df2cda
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-int		onelink_startend(t_room *tab, t_path **best, int **matrix)
-{
-	if (matrix[0][1] == -1)
-	{
-		//on bloque les autres chemins puis boom tout dans le best;
-	}
-	else
-		return (0);
-}
 
 void	put_wth(int **matrix, int i, int j, t_room *tab)
 {

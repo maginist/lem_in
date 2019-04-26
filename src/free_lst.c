@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 10:08:54 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/25 15:10:22 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/26 09:55:07 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	free_matrix(int ***matrix, int size)
 	int	i;
 
 	i = 0;
+	if (!(matrix))
+		return ;
 	while (i < size)
 		free((*matrix)[i++]);
 	free(*matrix);
