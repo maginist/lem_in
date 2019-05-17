@@ -6,11 +6,24 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/17 13:48:40 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/17 15:12:26 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	clean_wth(t_room *tab, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (tab[i].taken == 0)
+			tab[i].wth = 0;
+		i++;
+	}
+}
 
 void	main4(t_path **best, t_path **new, int size, t_room *tab)
 {
@@ -19,14 +32,14 @@ void	main4(t_path **best, t_path **new, int size, t_room *tab)
 		return ;
 	if (!(*best))
 	{
-	//	printf("%d steps\n",(*new)->step);
+		printf("%d steps\n",(*new)->step);
 		init_t_path(best, size, (*new)->path_n);
 		copy_best(*new, *best, size, tab);
 		calc_step(*best, tab[0].taken, (*best)->path_n);
 	}
 	else if (*best && (*new)->step > 0 && (*new)->step < (*best)->step)
 	{
-	//	printf("from %d steps to %d steps\n",(*best)->step, (*new)->step);
+		printf("from %d steps to %d steps\n",(*best)->step, (*new)->step);
 		free_paths(best);
 		init_t_path(best, size, (*new)->path_n);
 		copy_best(*new, *best, size, tab);
@@ -50,6 +63,8 @@ t_path	*main_3bis(int **matrix, t_room *tab, int size, int first_room)
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
 	while (++i <= path_max)
 	{
+		clean_wth(tab, size);
+		put_wth(matrix, tab, size);
 		init_t_path(&new, size, i);
 		new->path[0][0] = first_room;
 		tab[new->path[0][0]].taken = 1;
@@ -73,11 +88,12 @@ void	main3(int **matrix, t_room *tab, int size)
 	t_path	*best_tmp;
 	int		i;
 	int		j;
+//	int		step;
 
 	better = 0;
 	i = matrix[0][0];
 	j = 2;
-	printf("tab[matrix[0][0]].wth = %d\n", tab[matrix[0][0]].wth);
+	//printf("tab[matrix[0][0]].wth = %d\n", tab[matrix[0][0]].wth);
 	while (i > 0)
 	{
 		while (matrix[0][j] != -1)
@@ -88,12 +104,11 @@ void	main3(int **matrix, t_room *tab, int size)
 		{
 			best_tmp = main_3bis(matrix, tab, size, j);
 			main4(&better, &best_tmp, size, tab);
-			printf("%d stepsiBETTER\n",better->step);
+	//		printf("%d stepsiBETTER\n",better->step);
 			free_paths(&best_tmp);
 		}
 		j++;
-		/*
-		int k;
+/*		int k;
 		int l;
 		l = 0;
 		printf("better->step %d, better_path_n : %d,  new->step %d, better-Path_n : %d\n", (better)->step, (better)->path_n, (better)->step, (better)->path_n);
@@ -108,10 +123,11 @@ void	main3(int **matrix, t_room *tab, int size)
 			printf("\npath[%d][%d] = %d -> room: %s.wth = %d taken = %d", l, k, better->path[l][k], tab[better->path[l][k]].name, tab[better->path[l][k]].wth, tab[better->path[l][k]].taken);
 			printf("\nlen = %d\n", better->len[l]);
 			l++;
-		}
-	*/}
-	printf("%d steps better", better->step);
-	//use_path(best, tab, size);
+		}*/
+	}
+//	step = better->step;
+	//use_path(better, tab, size);
+	printf("\n%d steps better\n", better->step);
 	free_paths(&better);
 }
 
@@ -144,7 +160,7 @@ void	main2(t_room **roombeg, int ant_n, t_write **str)
 		else
 		{
 			tab[0].taken = ant_n;
-			write_data(str);
+		//	write_data(str);
 			main3(matrix, tab, size);
 		}
 		free_room_tab(&tab, size);
