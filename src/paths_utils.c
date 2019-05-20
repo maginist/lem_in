@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/20 11:41:52 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/20 18:18:03 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,28 +66,22 @@ void	use_path(t_path *best, t_room *tab, int size)
 int		calc_step(t_path *struc, int ant_n, int path_n)
 {
 	int	i;
-
-	struc->path[0][struc->len[0]] = ant_n;
-	if (path_n == 1 || struc->len[1] <= 0)
-	{
-		struc->step = struc->len[0] + struc->path[0][struc->len[0]] - 1;
-		return (struc->step);
-	}
-	i = 1;
-	while (i > 0)
+	int	best;
+	while (ant_n > 0)
 	{
 		i = 0;
-		while ((i < path_n - 1) && struc->len[i + 1] > 0
-				&& struc->len[i + 1] > 0 && (struc->len[i]
-					+ struc->path[i][struc->len[i]] - 1 >= struc->len[i + 1]
-					+ struc->path[i + 1][struc->len[i + 1]]))
+		best = 0;
+		while (i < path_n)
+		{
+			if (struc->len[i] + struc->path[i][struc->len[i]]
+					< struc->len[best] + struc->path[best][struc->len[best]])
+				best = i;
 			i++;
-		if (i > 0)
-			struc->path[0][struc->len[0]]--;
-		if (i > 0)
-			struc->path[i][struc->len[i]]++;
+		}
+		ant_n--;
+		struc->path[best][struc->len[best]]++;
 	}
-	struc->step = struc->len[1] + (struc->path[1][struc->len[1]] - 1);
+	struc->step = struc->len[0] + (struc->path[0][struc->len[0]] - 1);
 	i = -1;
 	return (struc->step);
 }

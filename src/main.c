@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/20 17:58:27 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/20 18:22:53 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	main3(int **matrix, t_room *tab, int size)
 		}
 		j++;
 	}
+	printf("step == %d\n", better->step);
 	use_path(better, tab, size);
 	free_paths(&better);
 }
