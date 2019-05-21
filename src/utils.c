@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/20 11:45:11 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/21 10:56:59 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	copy_best(t_path *best, t_path *new, int size, t_room *tab)
 	(void)size;
 	if (!(best))
 		return ;
-	while (i < best->path_n && best->len[i] > 0)
+	while (i < best->path_n)
 	{
 		new->len[i] = best->len[i];
 		j = 0;

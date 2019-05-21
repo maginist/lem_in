@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/20 18:22:53 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/21 12:15:40 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	main3(int **matrix, t_room *tab, int size)
 	t_path	*best_tmp;
 	int		i;
 	int		j;
+	int		step;
 
 	better = 0;
 	i = matrix[0][0];
@@ -83,9 +84,10 @@ void	main3(int **matrix, t_room *tab, int size)
 		}
 		j++;
 	}
-	printf("step == %d\n", better->step);
+	step = better->step;
 	use_path(better, tab, size);
 	free_paths(&better);
+	printf("step == %d\n", step);
 }
 
 void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
