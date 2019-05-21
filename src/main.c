@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/21 12:46:22 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/21 14:29:47 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,14 @@ t_path	*main_3bis(int **matrix, t_room *tab, int size, int first_room)
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
 	while (++i <= path_max)
 	{
-		main3_ter(matrix, tab, &new, i);
+		init_t_path(&new, size, i);
 		new->path[0][0] = first_room;
 		if (!(main_findpath(matrix, tab, new, best)))
 			break ;
 		calc_step(new, tab[0].taken, i);
 		if (best && new->step >= best->step && new->path_n > best->path_n)
 			break ;
-		main4(&best, &new, size, tab);
-		free_paths(&new);
+		main3_ter(matrix, tab, &new, &best);
 	}
 	free_paths(&new);
 	return (best);
@@ -110,7 +109,7 @@ void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
 	else
 	{
 		tab[0].taken = ant_n;
-	//	write_data(str);
+		write_data(str);
 		main3(matrix, tab, size);
 	}
 	free_room_tab(&tab, size);

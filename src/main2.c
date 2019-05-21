@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:29:44 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/20 17:54:37 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/21 14:27:29 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,16 @@ int		main_findpath(int **matrix, t_room *tab, t_path *new, t_path *best)
 	}
 }
 
-void	main3_ter(int **matrix, t_room *tab, t_path **new, int i)
+void	main3_ter(int **matrix, t_room *tab, t_path **new, t_path **best)
 {
 	static int	size;
 
 	if (!(size))
 		size = calc_size(tab);
+	main4(best, new, size, tab);
+	free_paths(new);
 	clean_wth(tab, size);
 	put_wth(matrix, tab, size);
-	init_t_path(new, size, i);
 	return ;
 }
 
