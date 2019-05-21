@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/21 14:28:49 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/21 18:06:33 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,11 @@ int					main_findpath(int **matrix, t_room *tab, t_path *new
 		, t_path *best);
 void				main4(t_path **best, t_path **new, int size, t_room *tab);
 void				clean_wth(t_room *tab, int size);
+int					way_is_possible(int **matrix, t_room *tab, t_path *new
+		, int way);
+int					close_path(t_path *new, t_room *tab, int size, int f_case);
+int					check_nodes(t_room *tab, t_path **n, t_path *b, int **mtrx);
+int					way_is_good(int **matrix, t_room *tab, t_path *new
+		, int way);
 
 #endif
