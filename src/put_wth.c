@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/21 12:14:57 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/21 12:51:28 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
 		j = 0;
 		while (lim > 0)
 		{
-			if (matrix[visited[i]][j] == -1 && lim-- > 0)
+			if (matrix[visited[i]][j] == -1 && lim-- > 0 && matrix[j][j] > 1)
 				if (visited[i] != 0 && (tab[j].wth == 0))
 				{
 					tab[j].wth = tab[visited[i]].wth + 1;
@@ -93,13 +93,13 @@ void	onelink_startend(int ant_n)
 	int	i;
 
 	i = 1;
-	printf("\n");
+	ft_printf("\n");
 	while (i != ant_n)
 	{
-		printf("L%d-end ", i);
+		ft_printf("L%d-end ", i);
 		i++;
 	}
-	printf("L%d-end", i);
+	ft_printf("L%d-end", i);
 }
 
 int		fill_matrix(t_room *tab, int **matrix, char *str, int size)

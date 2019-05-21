@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/21 12:15:40 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/21 12:46:22 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
 	else
 	{
 		tab[0].taken = ant_n;
-		write_data(str);
+	//	write_data(str);
 		main3(matrix, tab, size);
 	}
 	free_room_tab(&tab, size);
