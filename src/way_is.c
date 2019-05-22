@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:52:42 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/21 18:00:28 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/22 09:48:10 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	way_is_possible2(t_room *tab, int i, int way, int *best)
 {
 	if (i != 0 && (i == 1 ||
-				(tab[i].taken == 0 && tab[i].used != way + 1
-				&& (!(*best) || tab[(*best)].wth > tab[i].wth)
-				&& tab[i].wth > 0)))
+			(tab[i].taken == 0 && tab[i].used != way + 1
+			&& (!(*best) || tab[(*best)].wth > tab[i].wth)
+			&& tab[i].wth > 0)))
 		(*best) = i;
 }
 
@@ -41,11 +41,12 @@ int		way_is_good(int **matrix, t_room *tab, t_path *new, int way)
 		if (best == 1)
 			break ;
 	}
-	new->path[way][pos] = best;
-	if (matrix[new->path[way][pos]][new->path[way][pos]] > 2
-			&& new->path[way][pos] != 1)
-		new->node[way][pos] = new->path[way][pos];
-	tab[new->path[way][pos]].taken = way + 1;
+	if (best)
+	{
+		if (matrix[best][best] > 2 && best != 1)
+			new->node[way][pos] = best;
+		tab[best].taken = way + 1;
+	}
 	return (best);
 }
 
