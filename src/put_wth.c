@@ -6,33 +6,60 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/21 15:40:08 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/24 14:38:57 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	add_to_queue(int **queue, int room, int add_or_push, int *first)
+void	add_to_queue(int **queue, int room, int add_or_push)
 {
-	int			i;
-	static int	last;
+	int	i;
 
-	if ((*first) == 1)
-	{
-		last = 1;
-		*first = 0;
-	}
 	i = 0;
 	if (add_or_push == 1)
-		(*queue)[last++] = room;
-	else
 	{
+		while ((*queue)[i] != -1)
+		{
+			if ((*queue)[i] == room)
+				return ;
+			i++;
+		}
+		(*queue)[i] = room;
+	}
+	else
 		while ((*queue)[i] != -1)
 		{
 			(*queue)[i] = (*queue)[i + 1];
 			i++;
 		}
-		last--;
+}
+
+void	full_put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
+{
+	int			i;
+	int			j;
+	int			lim;
+	static int	size;
+
+	if (!(size))
+		size = calc_size(tab);
+	i = -1;
+	while (queue[0] != -1 && ++i < size)
+	{
+		visited[i] = queue[0];
+		add_to_queue(&queue, 0, 0);
+		lim = matrix[visited[i]][visited[i]];
+		j = -1;
+		while (lim > 0 && j < size)
+		{
+			if (matrix[visited[i]][++j] == -1 && lim-- > 0 && matrix[j][j] > 1
+					&& visited[i] != 0 && tab[j].wth == 0 && j != 1)
+			{
+				tab[j].wth = tab[visited[i]].wth + 1;
+				add_to_queue(&queue, j, 1);
+			}
+		}
 	}
 }
 
@@ -42,29 +69,29 @@ void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
 	int			j;
 	int			lim;
 	static int	size;
-	int			first;
 
-	first = 1;
-	i = -1;
 	if (!(size))
 		size = calc_size(tab);
+	i = -1;
 	while (queue[0] != -1 && ++i < size)
 	{
 		visited[i] = queue[0];
-		add_to_queue(&queue, 0, 0, &first);
+		add_to_queue(&queue, 0, 0);
 		lim = matrix[visited[i]][visited[i]];
 		j = -1;
-		while (lim > 0)
+		while (lim > 0 && j < size)
 			if (matrix[visited[i]][++j] == -1 && lim-- > 0 && matrix[j][j] > 1
-					&& visited[i] != 0 && tab[j].wth == 0)
+					&& visited[i] != 0 && tab[j].wth == 0 && j != 1)
 			{
 				tab[j].wth = tab[visited[i]].wth + 1;
-				add_to_queue(&queue, j, 1, &first);
+				if (j == 0)
+					return ;
+				add_to_queue(&queue, j, 1);
 			}
 	}
 }
 
-void	put_wth(int **matrix, t_room *tab, int size)
+void	put_wth(int **matrix, t_room *tab, int size, int full)
 {
 	int			*visited;
 	int			*queue;
@@ -83,23 +110,12 @@ void	put_wth(int **matrix, t_room *tab, int size)
 		queue[i++] = -1;
 	}
 	queue[0] = 1;
-	put_wth2(visited, queue, matrix, tab);
+	if (full == 0)
+		put_wth2(visited, queue, matrix, tab);
+	else
+		full_put_wth2(visited, queue, matrix, tab);
 	free(queue);
 	free(visited);
-}
-
-void	onelink_startend(int ant_n)
-{
-	int			i;
-
-	i = 1;
-	ft_printf("\n");
-	while (i != ant_n)
-	{
-		ft_printf("L%d-end ", i);
-		i++;
-	}
-	ft_printf("L%d-end", i);
 }
 
 int		fill_matrix(t_room *tab, int **matrix, char *str, int size)

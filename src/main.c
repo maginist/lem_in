@@ -6,11 +6,58 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/21 16:53:23 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/24 17:29:14 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	shortcut_between_link(int **matrix, int i, int *j, int save)
+{
+	if (i == (*j))
+		(*j)--;
+	while (matrix[i][(*j)] == 0 && (*j) >= 0)
+		(*j)--;
+	if ((*j) < 0 || matrix[i][(*j)] == -1 || matrix[i][(*j) - 1] == -1)
+	{
+		if (matrix[i][(*j) + 1] == 0)
+			matrix[i][(*j) + 1] = save - (*j);
+	}
+	else
+	{
+		(*j) -= 2;
+		shortcut_between_link(matrix, i, j, save);
+	}
+}
+
+void	set_matrix_shortcut(int **matrix, int size)
+{
+	int i;
+	int	j;
+	int	save;
+	int	lim;
+
+	i = 0;
+	while (++i < size)
+	{
+		j = size - 1;
+		save = 0;
+		lim = matrix[i][i];
+		while (lim > 0)
+		{
+			while (matrix[i][j] != -1)
+				j--;
+			if ((j > 0 && matrix[i][j - 1] == 0) || (j - 1 == i && matrix[i][j - 2] == 0))
+			{
+				save = j--;
+				shortcut_between_link(matrix, i, &j, save);
+			}
+			else
+				j--;
+			lim--;
+		}
+	}
+}
 
 void	main4(t_path **best, t_path **new, int size, t_room *tab)
 {
@@ -41,6 +88,7 @@ t_path	*main_3bis(int **matrix, t_room *tab, int size, int first_room)
 	i = 0;
 	best = 0;
 	new = 0;
+	clean_used(tab, size);
 	clean_some_taken(tab, size);
 	path_max = ((matrix[1][1] > matrix[0][0]) ? matrix[0][0] : matrix[1][1]);
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
@@ -48,7 +96,7 @@ t_path	*main_3bis(int **matrix, t_room *tab, int size, int first_room)
 	{
 		init_t_path(&new, size, i);
 		new->path[0][0] = first_room;
-		if (!(main_findpath(matrix, tab, new, best)))
+		if (!(main_findpath(matrix, tab, &new, best)))
 			break ;
 		calc_step(new, tab[0].taken, i);
 		if (best && new->step >= best->step && new->path_n > best->path_n)
@@ -63,9 +111,12 @@ void	main3(int **matrix, t_room *tab, int size)
 {
 	t_path	*better;
 	t_path	*best_tmp;
+	int		*wth_cpy;
 	int		i;
 	int		j;
 
+	wth_cpy = 0;
+	copy_wth(&wth_cpy, tab, size);
 	better = 0;
 	i = matrix[0][0];
 	j = 2;
@@ -74,6 +125,8 @@ void	main3(int **matrix, t_room *tab, int size)
 		while (matrix[0][j] != -1)
 			j++;
 		i--;
+		if (matrix[0][0] - 1 != i)
+			reset_wth(wth_cpy, tab, size);
 		if (tab[j].wth > 0)
 		{
 			best_tmp = main_3bis(matrix, tab, size, j);
@@ -82,10 +135,9 @@ void	main3(int **matrix, t_room *tab, int size)
 		}
 		j++;
 	}
-	i = better->step;
 	use_path(better, tab, size);
 	free_paths(&better);
-	printf("step == %d\n", i);
+	free(wth_cpy);
 }
 
 void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
@@ -101,7 +153,7 @@ void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
 		set_matrix(tab, str, size, &matrix);
 		if (!(main2_onelink(matrix, tab, ant_n, str)))
 			return ;
-		put_wth(matrix, tab, size);
+		put_wth(matrix, tab, size, 1);
 	}
 	if (ant_n <= 0 || tab[0].wth <= 0)
 		write(2, "ERROR\n", 6);
@@ -109,6 +161,7 @@ void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
 	{
 		tab[0].taken = ant_n;
 		write_data(str);
+		set_matrix_shortcut(matrix, size);
 		main3(matrix, tab, size);
 	}
 	free_room_tab(&tab, size);

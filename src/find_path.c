@@ -6,22 +6,19 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/22 09:47:22 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/23 11:49:26 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	make_a_turn(int **matrix, t_room *tab, t_path *new, int node)
+void	clean_used(t_room *tab, int size)
 {
-	int			i;
+	int i;
 
-	i = 1;
-	while (new->path[new->path_n - 2][i - 1] != node)
-		i++;
-	new->path[new->path_n - 2][i] = way_is_possible(matrix, tab, new,
-			new->path_n - 2);
-	tab[new->path[new->path_n - 2][i]].taken = new->path_n - 2 + 1;
+	i = 0;
+	while (i < size)
+		tab[i++].used = 0;
 }
 
 void	try_path(int **matrix, t_room *tab, t_path *new, t_path *best)
@@ -54,7 +51,6 @@ int		find_path(int **matrix, t_room *tab, t_path **new, t_path *best)
 {
 	int			i;
 	int			j;
-	int			node;
 
 	i = (*new)->path_n - 2;
 	while (++i < (*new)->path_n)
@@ -65,8 +61,8 @@ int		find_path(int **matrix, t_room *tab, t_path **new, t_path *best)
 		if ((*new)->path[i][j] == 0)
 		{
 			if ((i == (*new)->path_n - 1 || i == (*new)->path_n - 2)
-					&& ((node = check_nodes(tab, new, best, matrix)) > 0))
-				make_a_turn(matrix, tab, *new, node);
+					&& ((check_nodes(tab, new, best, matrix)) > 0))
+				i++;
 			else if (way_is_possible(matrix, tab, *new, (*new)->path_n - 1) > 0)
 				try_path(matrix, tab, *new, best);
 			else

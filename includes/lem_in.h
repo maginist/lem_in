@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/21 18:06:33 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/24 14:26:12 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void				init_t_path(t_path **struc, int size, int t_path_n);
 int					find_path(int **matrix, t_room *tab, t_path **new
 		, t_path *best);
 int					calc_step(t_path *struc, int ant_n, int path_n);
-void				put_wth(int **matrix, t_room *tab, int size);
+void				put_wth(int **matrix, t_room *tab, int size, int full);
 int					calc_size(t_room *tab);
 void				main3_ter(int **matrix, t_room *tab, t_path **new
 		, t_path **best);
@@ -89,7 +89,7 @@ void				init_tab(t_room **tab, int i, t_room *current);
 void				init_tab(t_room **tab, int i, t_room * current);
 void				sort_paths(t_path **new, int size, t_room *tab
 		, int **matrix);
-int					main_findpath(int **matrix, t_room *tab, t_path *new
+int					main_findpath(int **matrix, t_room *tab, t_path **new
 		, t_path *best);
 void				main4(t_path **best, t_path **new, int size, t_room *tab);
 void				clean_wth(t_room *tab, int size);
@@ -99,5 +99,9 @@ int					close_path(t_path *new, t_room *tab, int size, int f_case);
 int					check_nodes(t_room *tab, t_path **n, t_path *b, int **mtrx);
 int					way_is_good(int **matrix, t_room *tab, t_path *new
 		, int way);
+void				clean_used(t_room *tab, int size);
+void				add_to_queue(int **queue, int room, int add_or_push);
+void				reset_wth(int *cpy, t_room *tab, int size);
+void				copy_wth(int **cpy, t_room *tab, int size);
 
 #endif
