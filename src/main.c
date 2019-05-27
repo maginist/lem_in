@@ -6,58 +6,11 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/24 17:29:14 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/27 14:35:03 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-void	shortcut_between_link(int **matrix, int i, int *j, int save)
-{
-	if (i == (*j))
-		(*j)--;
-	while (matrix[i][(*j)] == 0 && (*j) >= 0)
-		(*j)--;
-	if ((*j) < 0 || matrix[i][(*j)] == -1 || matrix[i][(*j) - 1] == -1)
-	{
-		if (matrix[i][(*j) + 1] == 0)
-			matrix[i][(*j) + 1] = save - (*j);
-	}
-	else
-	{
-		(*j) -= 2;
-		shortcut_between_link(matrix, i, j, save);
-	}
-}
-
-void	set_matrix_shortcut(int **matrix, int size)
-{
-	int i;
-	int	j;
-	int	save;
-	int	lim;
-
-	i = 0;
-	while (++i < size)
-	{
-		j = size - 1;
-		save = 0;
-		lim = matrix[i][i];
-		while (lim > 0)
-		{
-			while (matrix[i][j] != -1)
-				j--;
-			if ((j > 0 && matrix[i][j - 1] == 0) || (j - 1 == i && matrix[i][j - 2] == 0))
-			{
-				save = j--;
-				shortcut_between_link(matrix, i, &j, save);
-			}
-			else
-				j--;
-			lim--;
-		}
-	}
-}
 
 void	main4(t_path **best, t_path **new, int size, t_room *tab)
 {
@@ -107,16 +60,13 @@ t_path	*main_3bis(int **matrix, t_room *tab, int size, int first_room)
 	return (best);
 }
 
-void	main3(int **matrix, t_room *tab, int size)
+void	main3(int **matrix, t_room *tab, int *wth_cpy, int size)
 {
 	t_path	*better;
 	t_path	*best_tmp;
-	int		*wth_cpy;
 	int		i;
 	int		j;
 
-	wth_cpy = 0;
-	copy_wth(&wth_cpy, tab, size);
 	better = 0;
 	i = matrix[0][0];
 	j = 2;
@@ -135,54 +85,56 @@ void	main3(int **matrix, t_room *tab, int size)
 		}
 		j++;
 	}
-	use_path(better, tab, size);
-	free_paths(&better);
-	free(wth_cpy);
+	stock_and_print_step(0, better->step);
+	use_path(&better, tab, size);
 }
 
-void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
+int		main2(t_room **roombeg, int ant_n, t_write **str, int arg)
 {
 	int		**matrix;
 	t_room	*tab;
+	int		size;
 
 	tab = 0;
 	matrix = 0;
+	size = ft_lstlen(roombeg);
 	if (ant_n > 0)
 	{
 		rooms_in_tab(&tab, roombeg);
 		set_matrix(tab, str, size, &matrix);
+		if (arg == 1)
+			return (print_matrix(&matrix, size, str, &tab));
 		if (!(main2_onelink(matrix, tab, ant_n, str)))
-			return ;
+			return (0);
 		put_wth(matrix, tab, size, 1);
 	}
 	if (ant_n <= 0 || tab[0].wth <= 0)
 		write(2, "ERROR\n", 6);
 	else
-	{
-		tab[0].taken = ant_n;
-		write_data(str);
-		set_matrix_shortcut(matrix, size);
-		main3(matrix, tab, size);
-	}
+		lets_algo(matrix, str, tab, ant_n);
 	free_room_tab(&tab, size);
 	free_matrix(&matrix, size);
 	free_lst_write(str);
-	return ;
+	return (0);
 }
 
-int		main(void)
+int		main(int ac, char **av)
 {
 	int		ant_n;
 	t_room	*roombeg;
 	t_write	*str;
-	int		size;
+	int		arg_used;
 
 	ant_n = 0;
 	roombeg = 0;
 	str = 0;
+	arg_used = 0;
+	if (!(check_args(ac, av, &arg_used)))
+		return (0);
 	read_n_stock(&ant_n, &roombeg, &str);
-	size = ft_lstlen(&roombeg);
-	main2(&roombeg, ant_n, &str, size);
+	main2(&roombeg, ant_n, &str, arg_used);
+	if (arg_used == 2)
+		stock_and_print_step(1, 0);
 	free_lst_room(&roombeg);
 	return (0);
 }

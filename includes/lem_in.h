@@ -6,17 +6,12 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/24 14:26:12 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/27 14:24:16 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
-
-/////////////////////
-# include <stdio.h>//
-/////////////////////
-
 # include "../libprintf/include/libprintf.h"
 
 typedef	struct		s_room
@@ -79,14 +74,16 @@ void				put_wth(int **matrix, t_room *tab, int size, int full);
 int					calc_size(t_room *tab);
 void				main3_ter(int **matrix, t_room *tab, t_path **new
 		, t_path **best);
+void				main3(int **matrix, t_room *tab, int *wth_cpy
+, int size);
 void				free_paths(t_path **begin);
-void				use_path(t_path *best, t_room *tab, int size);
+void				use_path(t_path **best, t_room *tab, int size);
 void				write_path(t_path *best, t_room *tab, int j, int *first);
 void				copy_best(t_path *best, t_path *new, int size, t_room *tab);
 void				clean_some_taken(t_room *tab, int size);
 void				onelink_startend(int ant_n);
 void				init_tab(t_room **tab, int i, t_room *current);
-void				init_tab(t_room **tab, int i, t_room * current);
+void				init_tab(t_room **tab, int i, t_room *current);
 void				sort_paths(t_path **new, int size, t_room *tab
 		, int **matrix);
 int					main_findpath(int **matrix, t_room *tab, t_path **new
@@ -100,8 +97,15 @@ int					check_nodes(t_room *tab, t_path **n, t_path *b, int **mtrx);
 int					way_is_good(int **matrix, t_room *tab, t_path *new
 		, int way);
 void				clean_used(t_room *tab, int size);
-void				add_to_queue(int **queue, int room, int add_or_push);
 void				reset_wth(int *cpy, t_room *tab, int size);
 void				copy_wth(int **cpy, t_room *tab, int size);
+void				set_matrix_shortcut(int **matrix, int size);
+void				lets_search_match(int **matrix, int i, int *j);
+void				lets_algo(int **matrix, t_write **str
+, t_room *tab, int ant_n);
+void				stock_and_print_step(int write, int best_step);
+int					check_args(int ac, char **av, int *arg_used);
+int					print_matrix(int ***matrix, int size, t_write **str
+		, t_room **tab);
 
 #endif
